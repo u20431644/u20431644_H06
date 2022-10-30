@@ -1,0 +1,175 @@
+﻿@model IEnumerable<DBTest.Models.order>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    int jan=0,feb=0,mar=0,apr=0,may=0,jun=0,jul=0,aug=0,sep=0,oct=0,nov=0,dec = 0;
+    
+}
+@foreach (var item in Model)
+{
+    switch (item.order_date.Month)
+    {
+        case 1:
+            jan++;
+            break;
+        case 2:
+            feb++;
+            break;
+        case 3:
+            mar++;
+            break;
+        case 4:
+            apr++;
+            break;
+        case 5:
+            may++;
+            break;
+        case 6:
+            jun++;
+            break;
+        case 7:
+            jul++;
+            break;
+        case 8:
+            aug++;
+            break;
+        case 9:
+            sep++;
+            break;
+        case 10:
+            oct++;
+            break;
+        case 11:
+            nov++;
+            break;
+        case 12:
+            dec++;
+            break;
+    }
+
+}
+
+<h2>Mountain Bike Order Report</h2>
+<script src="~/Scripts/chart.js"></script>
+<canvas id="myChart" width="400" height="225"></canvas>
+<script>
+    const ctx = document.getElementById('myChart');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [{
+                label: 'Number of Mountain Bikes Sold',
+                data: [@jan, @feb, @mar, @apr, @may, @jun, @jul, @aug, @sep, @oct, @nov, @dec],
+                backgroundColor: [
+                    'rgba(237, 81, 81, 0.6)',
+                    'rgba(20, 158, 206, 0.6)',
+                    'rgba(167, 198, 54, 0.6)',
+                    'rgba(158, 85, 156, 0.6)',
+                    'rgba(252, 146, 31, 0.6)',
+                    'rgba(255, 222, 62, 0.6)',
+                    'rgba(247, 137, 216, 0.6)',
+                    'rgba(183, 129, 74, 0.6)',
+                    'rgba(60, 175, 153, 0.6)',
+                    'rgba(107, 107, 214, 0.6)',
+                    'rgba(181, 71, 121, 0.6)',
+                    'rgba(127, 127, 127, 0.6)'
+
+                ],
+                borderColor: [
+                    'rgba(237, 81, 81, 1)',
+                    'rgba(20, 158, 206, 1)',
+                    'rgba(167, 198, 54, 1)',
+                    'rgba(158, 85, 156, 1)',
+                    'rgba(252, 146, 31, 1)',
+                    'rgba(255, 222, 62, 1)',
+                    'rgba(247, 137, 216, 1)',
+                    'rgba(183, 129, 74, 1)',
+                    'rgba(60, 175, 153, 1)',
+                    'rgba(107, 107, 214, 1)',
+                    'rgba(181, 71, 121, 1)',
+                    'rgba(127, 127, 127, 1)'
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+    scales: {
+        y: {
+            beginAtZero: true
+                }
+        }
+    }
+});
+</script>
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.order_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.order_status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.order_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.required_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shipped_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.customer.first_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.staff.first_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.store.store_name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.order_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.order_items)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.order_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.required_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.shipped_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer.first_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.staff.first_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.store.store_name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.order_id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.order_id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.order_id })
+                </td>
+            </tr>
+        }
+
+    </table>*@

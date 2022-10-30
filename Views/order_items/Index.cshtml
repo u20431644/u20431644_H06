@@ -1,0 +1,90 @@
+﻿@model IEnumerable<DBTest.Models.order_items>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Orders</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Product Name
+            @*@Html.DisplayNameFor(model => model.quantity)*@
+        </th>
+        <th>
+            List Price
+            @*@Html.DisplayNameFor(model => model.list_price)*@
+        </th>
+        <th>
+            Quantity
+            @*@Html.DisplayNameFor(model => model.discount)*@
+        </th>
+        <!--<th>-->
+        @*@Html.DisplayNameFor(model => model.product.product_name)*@
+        <!--</th>-->
+        <th>Total</th>
+    </tr>
+    @{
+        decimal cost = 0;
+        int quant = 0;
+        double total = 0;
+        double ordertotal = 0;
+        DateTime dateTime;
+        int orderID = 1;
+    }
+    @foreach (var item in Model)
+    {
+        cost = item.list_price;
+        quant = item.quantity;
+        total = Convert.ToDouble(quant * cost);
+        dateTime = item.order.order_date;
+        if (item.order_id == orderID)
+        {
+            ordertotal += total;
+
+        }
+        else
+        {
+
+            <tr>
+                <td style="font-weight:bold">
+                    Order ID: @(item.order_id-1) - @dateTime.Date
+                </td>
+                <td>
+                </td>
+                <td style="font-weight:bold">
+                    Grand total:
+                </td>
+                <td style="font-weight:bold">
+                    @ordertotal
+                </td>
+            </tr>
+            orderID++;
+            ordertotal = 0;
+            ordertotal += total;
+        }
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.product.product_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.list_price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity) @*need to group by order ID*@
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.order.order_id)
+                </td>*@
+            <td>
+                @total
+            </td>
+
+        </tr>
+
+    }
+
+</table>
